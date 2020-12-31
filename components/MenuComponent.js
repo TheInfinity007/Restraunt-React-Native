@@ -6,8 +6,8 @@ function Menu(props){
 
 	const renderMenuItem = ({item, index}) => {
 		return (
-			<ListItem bottomDivider key={index}>
-				<Avatar source={{ uri: 'https://logomesta.com/wp-content/uploads/2018/05/Royal-Food-Logo.png' }} />
+			<ListItem bottomDivider key={index} onPress={() => props.onPress(item.id)}>
+				<Avatar source={require('./images/uthappizza.png')} />
 				<ListItem.Content>
 					<ListItem.Title>{item.name}</ListItem.Title>
 					<ListItem.Subtitle>{item.description}</ListItem.Subtitle>

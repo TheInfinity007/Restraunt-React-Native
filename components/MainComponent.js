@@ -44,10 +44,9 @@ const MainNavigator = createDrawerNavigator();
 
 function MainNavigatorScreen({navigation}){
 	return(
-		<MainNavigator.Navigator initialRouteName="Home" screenOptions={{ backgroundColor: '#d1c4e9'}}>
-
+		<MainNavigator.Navigator initialRouteName="Home" drawerStyle={{ backgroundColor: '#d1c4e9' }}>
 			<MainNavigator.Screen name="Home" component={HomeNavigatorScreen} options={{ drawerLabel: 'Home' }} />
-			<MainNavigator.Screen name="Menu" component={MenuNavigatorScreen} options={{ drawerLabel: 'Menu' }} />
+			<MainNavigator.Screen name="Menu" component={MenuNavigatorScreen } options={{ drawerLabel: 'Menu' }} />
 		</MainNavigator.Navigator>
 	);
 }

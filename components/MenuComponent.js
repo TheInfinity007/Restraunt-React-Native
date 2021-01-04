@@ -12,7 +12,7 @@ class Menu extends Component{
 		};
 	}
 
-	static navigationOptions = {
+	static screenOptions = {
 		title: 'Menus'
 	}
 

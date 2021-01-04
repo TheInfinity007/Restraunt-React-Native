@@ -30,14 +30,12 @@ class Dishdetail extends Component{
 		}
 	}
 
-	static navigationOptions = {
+	static screenOptions = {
 		title: 'Dish Details'
 	};
 
 	render(){
 		const { dishId } = this.props.route.params;
-		console.log(this.props.route);
-		console.log(this.props.navigator);
 
 		return (
 			<RenderDish dish={this.state.dishes[+dishId]} />

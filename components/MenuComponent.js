@@ -10,13 +10,7 @@ class Menu extends Component{
 		this.state={
 			dishes: DISHES
 		};
-	}
-
-	static screenOptions = {
-		title: 'Menus'
-	}
-
-	
+	}	
 
 	render(){
 

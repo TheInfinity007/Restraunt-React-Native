@@ -37,10 +37,6 @@ class Home extends Component{
 		};
 	}
 
-	static screenOptions = {
-		title: 'Home'
-	}
-
 	render(){
 		return(
 			<ScrollView>

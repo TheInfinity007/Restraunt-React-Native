@@ -30,10 +30,6 @@ class Dishdetail extends Component{
 		}
 	}
 
-	static screenOptions = {
-		title: 'Dish Details'
-	};
-
 	render(){
 		const { dishId } = this.props.route.params;
 

@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
-import { View, Text, ScrollView, FlatList, SafeAreaView } from 'react-native';
-import { Card, ListItem,Avatar } from 'react-native-elements';
+import { View, Text, ScrollView, FlatList } from 'react-native';
+import { SafeAreaView } from 'react-native-safe-area-context';
+import { Card, ListItem, Avatar } from 'react-native-elements';
 import { LEADERS } from '../shared/leaders';
 
 /* import { LogBox } from 'react-native'

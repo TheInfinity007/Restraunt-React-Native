@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { ScrollView, View, Text } from 'react-native';
-import { Card } from 'react-native-elements';
+import { Card, Icon } from 'react-native-elements';
 import { DISHES } from '../shared/dishes';
 import { PROMOTIONS } from '../shared/promotions';
 import { LEADERS } from '../shared/leaders';
@@ -36,6 +36,18 @@ class Home extends Component{
 			promotions: PROMOTIONS
 		};
 	}
+
+	static navigationOptions = {
+	    drawerLabel: 'Homies',
+	    drawerIcon: ({ tintColor }) => (
+	      <Icon
+	        name='home'
+	        type='font-awesome'
+	        size={24}
+	        color={tintcolor}
+	      />
+	    ),
+	  };
 
 	render(){
 		return(

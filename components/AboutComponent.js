@@ -4,11 +4,11 @@ import { SafeAreaView } from 'react-native-safe-area-context';
 import { Card, ListItem, Avatar } from 'react-native-elements';
 import { LEADERS } from '../shared/leaders';
 
-/* import { LogBox } from 'react-native'
-LogBox.ignoreWarnings([
+import { LogBox } from 'react-native';
+LogBox.ignoreLogs([
   'VirtualizedLists should never be nested',
 ]);
-*/
+
 
 function RenderHistory(){
 	return(

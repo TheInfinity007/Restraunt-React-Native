@@ -4,6 +4,7 @@ import { SafeAreaView } from 'react-native-safe-area-context';
 import { Card, ListItem, Avatar } from 'react-native-elements';
 import { connect } from 'react-redux';
 import { baseUrl } from '../shared/baseUrl';
+import { Loading } from './LoadingComponent';
 
 import { LogBox } from 'react-native';
 LogBox.ignoreLogs([
@@ -35,35 +36,57 @@ const renderLeaderItem = ({ item, index }) => {
 			<Avatar rounded source={{uri: baseUrl + item.image }} />
 			<ListItem.Content>
 				<ListItem.Title>{item.name}</ListItem.Title>
-				<ListItem.Subtitle>{item.description}</ListItem.Subtitle>
+				<ListItem.Subtitle  >{item.description}</ListItem.Subtitle>
 			</ListItem.Content>
 		</ListItem>
 	);
 }
 
-function RenderLeaders(leaders){
-	return(
-		<Card>
-			<Card.FeaturedTitle  style={{ color: "#000", textAlign: 'center'}}>Corporate Leadership</Card.FeaturedTitle>
-			<Card.Divider />
-			<FlatList
-				data={leaders}
-				renderItem={renderLeaderItem}
-				keyExtractor={(item) => item.id.toString()}
-				/>
-		</Card>
-	);
-}
 
 class About extends Component{
 
 	render(){
-		return(
-			<ScrollView>
-				<RenderHistory />
-				{RenderLeaders(this.props.leaders.leaders)}
-			</ScrollView>
-		);
+
+		if(this.props.leaders.isLoading){
+			return(
+				<ScrollView>
+					<RenderHistory />
+					<Card>
+						<Card.FeaturedTitle  style={{ color: "#000", textAlign: 'center'}}>Corporate Leadership</Card.FeaturedTitle>
+						<Card.Divider />
+						<Loading />
+					</Card>
+				</ScrollView>
+			);	
+		}
+		else if(this.props.leaders.errMess){
+			return(
+				<ScrollView>
+					<RenderHistory />
+					<Card>
+						<Card.FeaturedTitle  style={{ color: "#000", textAlign: 'center'}}>Corporate Leadership</Card.FeaturedTitle>
+						<Card.Divider />
+						<Text>{this.props.leaders.errMess}</Text>
+					</Card>
+				</ScrollView>
+			);	
+		}
+		else{
+			return(
+				<ScrollView>
+					<RenderHistory />
+					<Card>
+						<Card.FeaturedTitle  style={{ color: "#000", textAlign: 'center'}}>Corporate Leadership</Card.FeaturedTitle>
+						<Card.Divider />
+						<FlatList
+							data={this.props.leaders.leaders}
+							renderItem={renderLeaderItem}
+							keyExtractor={(item) => item.id.toString()}
+							/>
+					</Card>
+				</ScrollView>
+			);
+		}
 	}
 }
 

@@ -2,12 +2,20 @@ import React, { Component } from 'react';
 import { View, Text, ScrollView, FlatList } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { Card, ListItem, Avatar } from 'react-native-elements';
-import { LEADERS } from '../shared/leaders';
+import { connect } from 'react-redux';
+import { baseUrl } from '../shared/baseUrl';
 
 import { LogBox } from 'react-native';
 LogBox.ignoreLogs([
   'VirtualizedLists should never be nested',
 ]);
+
+
+const mapStateToProps = (state) => {
+	return{
+		leaders: state.leaders
+	}
+}
 
 
 function RenderHistory(){
@@ -23,8 +31,8 @@ function RenderHistory(){
 
 const renderLeaderItem = ({ item, index }) => {
 	return(
-		<ListItem key={index} bottomDivider>
-			<Avatar rounded source={require('./images/alberto.png')} />
+		<ListItem key={index} bottomDivider subtitleProps={{numberOfLines: 5}} >
+			<Avatar rounded source={{uri: baseUrl + item.image }} />
 			<ListItem.Content>
 				<ListItem.Title>{item.name}</ListItem.Title>
 				<ListItem.Subtitle>{item.description}</ListItem.Subtitle>
@@ -49,22 +57,14 @@ function RenderLeaders(leaders){
 
 class About extends Component{
 
-	constructor(props){
-		super(props);
-		this.state = {
-			leaders: LEADERS
-		};
-	}
-
 	render(){
 		return(
 			<ScrollView>
 				<RenderHistory />
-				{RenderLeaders(this.state.leaders)}
+				{RenderLeaders(this.props.leaders.leaders)}
 			</ScrollView>
 		);
 	}
-
 }
 
-export default About;
+export default connect(mapStateToProps)(About);

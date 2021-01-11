@@ -1,5 +1,7 @@
 import * as ActionTypes from './ActionTypes';
 
+// reducer - reducer are the function which take the previous state and action
+// and return next state
 export const promotions = (state = {
 	isLoading: true,
 	errMess: null,
@@ -15,7 +17,7 @@ export const promotions = (state = {
 		case ActionTypes.PROMOS_FAILED: 			
 			return {...state, isLoading: false, errMess: action.payload, promotions: []};
 
-		default
+		default:
 			return state;
 	}
 }

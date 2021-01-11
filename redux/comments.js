@@ -1,5 +1,7 @@
 import * as ActionTypes from './ActionTypes';
 
+// reducer - reducer are the function which take the previous state and action
+// and return next state
 export const comments = (state = {
 	isLoading: true,
 	errMess: null,
@@ -12,7 +14,7 @@ export const comments = (state = {
 		case ActionTypes.COMMENTS_FAILED:
 			return {...state, errMess: action.payload, comments: []};
 
-		default
+		default:
 			return state;
 	}
 }

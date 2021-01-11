@@ -1,6 +1,7 @@
 import * as ActionTypes from './ActionTypes';
 
-// reducer
+// reducer - reducer are the function which take the previous state and action
+// and return next state
 export const dishes = (state = {
 	isLoading: true,
 	errMess: null,
@@ -16,7 +17,7 @@ export const dishes = (state = {
 		case ActionTypes.DISHES_FAILED: 			
 			return {...state, isLoading: false, errMess: action.payload, dishes: []};
 
-		default
+		default:
 			return state;
 	}
 }

@@ -1,5 +1,5 @@
 import React, { Component }from 'react';
-import { Text, View, ScrollView, StyleSheet, Switch, Button} from 'react-native';
+import { Text, View, ScrollView, StyleSheet, Switch, Button, Modal} from 'react-native';
 import { Card } from 'react-native-elements';
 import DatePicker from 'react-native-datepicker';
 import { Picker } from '@react-native-picker/picker';
@@ -17,7 +17,8 @@ class Reservation extends Component{
 			smoking: false,
 			date: new Date(),
 			mode:'date',
-			show: false
+			show: false,
+			showModal: false
 		};
 	}
 
@@ -30,14 +31,22 @@ class Reservation extends Component{
 		});
 	}
 
+	toggleModal(){
+		this.setState({ showModal: !this.state.showModal })
+	}
+
 	handleReservation(){
 		console.log(JSON.stringify(this.state));
 		// console.log(this.state.date.toLocaleString());
+		this.toggleModal();
+	}
+
+	resetForm(){
 		this.setState({
 			guests: 1,
 			smoking: false,
 			date: new Date()
-		})
+		});
 	}
 
 	render(){
@@ -87,6 +96,22 @@ class Reservation extends Component{
 						onPress={() => this.handleReservation()}
 						accessibilityLabel='Learn more about this purple button' />
 				</View>
+				<Modal animationType="slide"
+					transparent={false}
+					visible={this.state.showModal}
+					onDismiss={() => { this.toggleModal(); this.resetForm() }}
+					onRequestClose={() => {this.toggleModal(); this.resetForm() }}
+					>
+					<View style={styles.modal}>
+						<Text style={styles.modalTitle}>Your Reservation</Text>
+						<Text style={styles.modalText}>Number of Guest: {this.state.guests} </Text>
+						<Text style={styles.modalText}>Smoking? : {this.state.smoking? 'Yes': 'No'}</Text>
+						<Text style={styles.modalText}>Date and Time: {this.state.date.toDateString()} {this.state.date.toLocaleTimeString()} </Text>
+						<Button onPress={() => {this.toggleModal(); this.resetForm()}}
+							color='#512da8'
+							title='Close' />
+					</View>
+				</Modal>
 			</ScrollView>
 		);
 	}
@@ -107,7 +132,44 @@ const styles = StyleSheet.create({
 	},
 	formItem: {
 		flex: 1
+	},
+	modal: {
+		justifyContent: 'center',
+		margin: 20
+	},
+	modalTitle:{
+		fontSize: 24,
+		fontWeight: 'bold',
+		backgroundColor: '#512da8',
+		textAlign: 'center',
+		color: 'white',
+		marginBottom: 20
+	},
+	modalText:{
+		fontSize: 18,
+		margin: 10
 	}
 });
 
 export default Reservation;
+
+/*
+<Modal animationType={'slide'}
+					transparent={false}
+					visible={this.state.showModal}
+					onDismiss={() => { this.toggleModal(); this.resetForm() }}
+					onRequestClose={() => {this.toggleModal(); this.resetForm() }}
+					>
+					<View style={styles.modal}>
+						<Text style={styles.modalTitle}>Your Reservation</Text>
+						<Text style={styles.modalText}>Number of Guest: {this.state.guests} </Text>
+						<Text style={styles.modalText}>Smoking? : {this.state.smoking}</Text>
+						<Text style={styles.modalText}>Date and Time: {(this.state.date).toLocaleString()}</Text>
+						<Button onPress={() => {this.toggleModal(); this.resetForm()}}
+							color='#512da8'
+							title='Close' />
+					</View>
+				}
+
+				</Modal>
+*/

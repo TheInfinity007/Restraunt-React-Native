@@ -1,14 +1,14 @@
 import React, { Component } from 'react';
 import Home from './HomeComponent';
 import Menu from './MenuComponent';
-import { DISHES } from '../shared/dishes';
 import Dishdetail from './DishdetailComponent';
 import Contact from './ContactComponent';
 import About from './AboutComponent';
+import Reservation from './ReservationComponent';
 import { View, Platform, Text, Image, StyleSheet, ScrollView } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
-import { createDrawerNavigator, DrawerItems, DrawerItemList, DrawerContentScrollView } from '@react-navigation/drawer';
+import { createDrawerNavigator, DrawerItemList, DrawerContentScrollView } from '@react-navigation/drawer';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { Icon } from 'react-native-elements';
 import { connect } from 'react-redux';
@@ -94,6 +94,21 @@ function AboutNavigatorScreen({ navigation }){
 	);
 }
 
+const ReservationNavigator = createStackNavigator();
+
+function ReservationNavigatorScreen({ navigation }){
+	return(
+		<ReservationNavigator.Navigator  screenOptions={({navigation}) => ({
+			headerStyle: { backgroundColor: '#512da8'},
+			headerTintColor: '#fff',
+			headerTitleStyle: { color: '#fff' },
+			headerLeft: () => (<Icon name="menu" size={24} color="white" onPress={()=>navigation.toggleDrawer()} /> )
+		})}>
+			<ReservationNavigator.Screen name="Reservation" component={Reservation} options={{title: 'Reservation'}} />
+		</ReservationNavigator.Navigator>
+	);
+}
+
 const CustomDrawerContentComponent = (props) => {
 	return(
 	<DrawerContentScrollView {...props}>
@@ -128,6 +143,9 @@ function MainNavigatorScreen({navigation}){
 				) }}  />
 			<MainNavigator.Screen name="About" component={AboutNavigatorScreen} options={{ drawerLabel: 'About', drawerIcon: ({ tintColor }) => (
 					<Icon name="info-circle" type='font-awesome' size={24} color={tintColor} />
+				) }}  />
+			<MainNavigator.Screen name="Reservation" component={ReservationNavigatorScreen} options={{ drawerLabel: 'Reserve Table', drawerIcon: ({ tintColor }) => (
+					<Icon name="cutlery" type='font-awesome' size={24} color={tintColor} />
 				) }}  />
 		</MainNavigator.Navigator>
 	);

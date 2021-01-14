@@ -5,6 +5,7 @@ import Dishdetail from './DishdetailComponent';
 import Contact from './ContactComponent';
 import About from './AboutComponent';
 import Reservation from './ReservationComponent';
+import Favorites from './FavoriteComponent';
 import { View, Platform, Text, Image, StyleSheet, ScrollView } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
@@ -57,7 +58,7 @@ function HomeNavigatorScreen({ navigation }){
 			headerStyle: { backgroundColor:'#512da8'} ,
 			headerTintColor: '#fff',
 			headerTitleStyle: { color: '#fff' },
-			headerLeft: (props) => (<Icon name="home" size={24} color="white" onPress={()=>navigation.toggleDrawer()} /> )
+			headerLeft: (props) => (<Icon name="menu" size={24} color="white" onPress={()=>navigation.toggleDrawer()} /> )
 		})}>
 			<HomeNavigator.Screen name="Home" component={Home} />
 		</HomeNavigator.Navigator>
@@ -72,7 +73,7 @@ function ContactNavigatorScreen({ navigation }){
 			headerStyle: { backgroundColor: '#512da8'},
 			headerTintColor: '#fff',
 			headerTitleStyle: { color: '#fff' },
-			headerLeft: () => (<Icon name="contacts" size={24} color="white" onPress={()=>navigation.toggleDrawer()} /> )
+			headerLeft: () => (<Icon name="menu" size={24} color="white" onPress={()=>navigation.toggleDrawer()} /> )
 		})}>
 			<ContactNavigator.Screen name="Contact" component={Contact} options={{title: ''}} />
 		</ContactNavigator.Navigator>
@@ -87,7 +88,7 @@ function AboutNavigatorScreen({ navigation }){
 			headerStyle: { backgroundColor: '#512da8'},
 			headerTintColor: '#fff',
 			headerTitleStyle: { color: '#fff' },
-			headerLeft: () => (<Icon name="info" size={24} color="white" onPress={()=>navigation.toggleDrawer()} /> )
+			headerLeft: () => (<Icon name="menu" size={24} color="white" onPress={()=>navigation.toggleDrawer()} /> )
 		})}>
 			<AboutNavigator.Screen name="About" component={About} options={{title: 'About Us'}} />
 		</AboutNavigator.Navigator>
@@ -106,6 +107,21 @@ function ReservationNavigatorScreen({ navigation }){
 		})}>
 			<ReservationNavigator.Screen name="Reservation" component={Reservation} options={{title: 'Reservation'}} />
 		</ReservationNavigator.Navigator>
+	);
+}
+
+const FavoritesNavigator = createStackNavigator();
+
+function FavoritesNavigatorScreen({ navigation }){
+	return(
+		<FavoritesNavigator.Navigator  screenOptions={({navigation}) => ({
+			headerStyle: { backgroundColor: '#512da8'},
+			headerTintColor: '#fff',
+			headerTitleStyle: { color: '#fff' },
+			headerLeft: () => (<Icon name="menu" size={24} color="white" onPress={()=>navigation.toggleDrawer()} /> )
+		})}>
+			<FavoritesNavigator.Screen name="Favorites" component={Favorites} options={{title: 'My Favorites'}} />
+		</FavoritesNavigator.Navigator>
 	);
 }
 
@@ -135,14 +151,17 @@ function MainNavigatorScreen({navigation}){
 			<MainNavigator.Screen name="Home" component={HomeNavigatorScreen} options={{drawerLabel: 'Home', drawerIcon: ({ tintColor }) => (
 					<Icon name="home" type='font-awesome' size={24} color={tintColor} />
 				)}}/>
+			<MainNavigator.Screen name="About" component={AboutNavigatorScreen} options={{ drawerLabel: 'About', drawerIcon: ({ tintColor }) => (
+					<Icon name="info-circle" type='font-awesome' size={24} color={tintColor} />
+				) }}  />
 			<MainNavigator.Screen name="Menu" component={MenuNavigatorScreen } options={{ drawerLabel: 'Menu', drawerIcon: ({ tintColor }) => (
 					<Icon name="list" type='font-awesome' size={24} color={tintColor} />
 				) }} />
 			<MainNavigator.Screen name="Contact" component={ContactNavigatorScreen} options={{ drawerLabel: 'Contact', drawerIcon: ({ tintColor }) => (
 					<Icon name="address-card" type='font-awesome' size={22} color={tintColor} />
 				) }}  />
-			<MainNavigator.Screen name="About" component={AboutNavigatorScreen} options={{ drawerLabel: 'About', drawerIcon: ({ tintColor }) => (
-					<Icon name="info-circle" type='font-awesome' size={24} color={tintColor} />
+			<MainNavigator.Screen name="Favorites" component={FavoritesNavigatorScreen} options={{ drawerLabel: 'My Favorites', drawerIcon: ({ tintColor }) => (
+					<Icon name="heart" type='font-awesome' size={24} color={tintColor} />
 				) }}  />
 			<MainNavigator.Screen name="Reservation" component={ReservationNavigatorScreen} options={{ drawerLabel: 'Reserve Table', drawerIcon: ({ tintColor }) => (
 					<Icon name="cutlery" type='font-awesome' size={24} color={tintColor} />

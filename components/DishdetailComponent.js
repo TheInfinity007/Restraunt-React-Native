@@ -3,7 +3,7 @@ import { View, Text, ScrollView, FlatList, Modal, Button } from 'react-native';
 import { Card, Icon, Rating, Input } from 'react-native-elements';
 import { connect } from 'react-redux';
 import { baseUrl } from '../shared/baseUrl';
-import { postFavorite } from '../redux/ActionCreators';
+import { postFavorite, postComment } from '../redux/ActionCreators';
 
 import { LogBox } from 'react-native';
 LogBox.ignoreLogs([
@@ -19,7 +19,8 @@ const mapStateToProps = (state) => {
 }
 
 const mapDispatchToProps = (dispatch) => ({
-	postFavorite: (dishId) => dispatch(postFavorite(dishId))
+	postFavorite: (dishId) => dispatch(postFavorite(dishId)),
+	postComment: (dishId, rating, comment, author) => dispatch(postComment(dishId, rating, comment, author))	
 });
 
 function RenderDish(props){
@@ -91,7 +92,7 @@ class Dishdetail extends Component{
 	}
 
 	handleComment(){
-		console.log(this.state);
+		this.props.postComment(this.props.route.params.dishId, this.state.rating, this.state.comment, this.state.author);
 		this.toggleModal();
 	}
 
@@ -122,7 +123,7 @@ class Dishdetail extends Component{
 						/>
 						<Button title="Submit" color="#512da8" onPress={() => this.handleComment() }/>
 						<View style={{marginTop: 30}}>
-						<Button title="Cancel" color="gray" onPress={() => this.toggleModal() } />
+							<Button title="Cancel" color="gray" onPress={() => this.toggleModal() } />
 						</View>
 					</View>
 				</Modal>

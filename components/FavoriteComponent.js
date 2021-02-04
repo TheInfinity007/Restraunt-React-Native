@@ -1,10 +1,9 @@
 import React, { Component } from 'react';
-import { View, FlatList, Text, Animated, I18nManager, StyleSheet } from 'react-native';
+import { View, FlatList, Text, StyleSheet, Alert } from 'react-native';
 import { ListItem, Avatar } from 'react-native-elements';
 import { connect } from 'react-redux';
 import { baseUrl } from '../shared/baseUrl';
 import { Loading } from './LoadingComponent';
-import { Swipeable, RectButton } from 'react-native-gesture-handler';
 import { deleteFavorite } from '../redux/ActionCreators';
 import Swipeout from 'react-native-swipeout';
 
@@ -30,7 +29,27 @@ class Favorites extends Component{
 				{
 					text: 'Delete',
 					type: 'delete',
-					onPress: () => this.props.deleteFavorite(item.id)
+					onPress: () => {
+						Alert.alert(
+							'Delete Favorite?',
+							'Are you sure you wish to delete the favorite dish ' + item.name + ' ?',
+							[
+								{
+									text: 'Cancel', 
+									onPress: () => console.log(item.name + ' Not Deleted'),
+									style: ' cancel'
+								},
+								{
+									text: 'OK',
+									onPress: () => this.props.deleteFavorite(item.id),
+									style: 'Ok'
+								}
+							],
+							{ cancelable: false }
+						)
+					}
+
+					
 				}
 			];
 			return(
